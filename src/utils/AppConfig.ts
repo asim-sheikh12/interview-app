@@ -1,8 +1,8 @@
 export const AppConfig = {
-  site_name: 'HRM - Thoughtwin',
+  site_name: 'NextJS',
   locale: 'en',
-  title: 'Software development company|top mobile app development company.',
-  description: ` Thoughtwin is a leading web, mobile app, and software development firm in India and the Canada, offers business IT technology services and solutions.`,
+  title: 'title',
+  description: `description`,
   tokenKey: 'token',
   paths: {
     BASE: process.env.NEXT_PUBLIC_BASE_PATH!,

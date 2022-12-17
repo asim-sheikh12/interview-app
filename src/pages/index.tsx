@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 
-import { connect } from '@/backend';
 import { Main, Meta } from '@/layouts';
 
 const HomeComponent = dynamic(() => import('../containers/Home'), {
@@ -20,7 +19,6 @@ const Index: React.FC<IProps> = (): JSX.Element => {
 export default Index;
 
 export async function getServerSideProps() {
-  await connect();
   return {
     props: {},
   };
