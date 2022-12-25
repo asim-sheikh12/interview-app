@@ -31,7 +31,7 @@ const Home: React.FC = () => {
     submitProps.setSubmitting(false);
   };
   return (
-    <Box sx={{ display: 'flex', backgroundColor: '#F0F0F0', height: '97vh' }}>
+    <Box sx={{ display: 'flex', backgroundColor: '#F0F0F0', height: '96vh' }}>
       <Grid
         container
         spacing={0}
