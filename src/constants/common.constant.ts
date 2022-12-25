@@ -1,9 +1,12 @@
-const basePath = `${
-  process.env.NEXT_PUBLIC_BASE_PATH ? process.env.NEXT_PUBLIC_BASE_PATH : ''
-}/icons/`;
+// const basePath = `${
+//   process.env.NEXT_PUBLIC_BASE_PATH ? process.env.NEXT_PUBLIC_BASE_PATH : ''
+// }/icons/`;
+import backgroundImg from '../assets/images/background.jpg';
+import logoIcon from '../assets/images/Logo.svg';
 
 export const icons = {
-  logoIcon: `${basePath}`,
+  logoIcon,
+  backgroundImg,
 };
 
 export const favIcons = `${process.env.NEXT_PUBLIC_BASE_PATH}/favicons`;

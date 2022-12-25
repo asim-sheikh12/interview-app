@@ -42,13 +42,15 @@ export const theme: ITheme = responsiveFontSizes(
       secondary: {
         main: '#3f51b5',
         light: '#6573c3',
-        dark: '#2c387e',
+        dark: '#0a0a0a',
       },
       primary: {
-        main: '#0052cc',
-        light: '#ab003c',
-        dark: '#f73378',
+        main: '#0a0a0a',
+        light: '#0a0a0a',
+        dark: '#0a0a0a',
+        contrastText: '#fff',
       },
+
       tertiary: {
         main: '#007bb2',
         light: '#007bb2',
@@ -58,7 +60,7 @@ export const theme: ITheme = responsiveFontSizes(
         default: '#ffffff',
       },
       error: {
-        main: '#D16947',
+        main: '#FF0000',
         light: '#D16947',
         dark: '#D16947',
       },
@@ -81,63 +83,67 @@ export const theme: ITheme = responsiveFontSizes(
     shape: {
       borderRadius: 0,
     },
+
     typography: {
-      fontFamily: 'Open Sans',
+      fontFamily: 'Roboto',
       fontSize: 16,
+      button: {
+        fontFamily: 'Roboto',
+      },
       body1: {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         fontSize: 16,
         fontWeight: 400,
         lineHeight: '20px',
       },
       body2: {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         fontSize: 14,
         lineHeight: '18px',
       },
       subtitle1: {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         lineHeight: 1.5,
         fontWeight: 500,
         fontSize: 17,
       },
       subtitle2: {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         fontSize: 15,
         lineHeight: 1.2,
       },
       caption: {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         fontSize: 12,
         lineHeight: 1,
       },
       overline: {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         fontSize: 10,
       },
       h1: {
-        fontFamily: 'Tenor Sans',
+        fontFamily: 'Roboto',
         fontWeight: 400,
         fontSize: 21,
       },
       h2: {
-        fontFamily: 'Tenor Sans',
+        fontFamily: 'Roboto',
         fontSize: 52,
       },
       h3: {
-        fontFamily: 'Tenor Sans',
+        fontFamily: 'Roboto',
       },
       h4: {
-        fontFamily: 'Tenor Sans',
+        fontFamily: 'Roboto',
         fontSize: 44,
       },
       h5: {
-        fontFamily: 'Tenor Sans',
+        fontFamily: 'Roboto',
         fontSize: 36,
         lineHeight: 1.125,
       },
       h6: {
-        fontFamily: 'Tenor Sans',
+        fontFamily: 'Roboto',
         fontSize: 25,
         lineHeight: 1.125,
       },
