@@ -21,7 +21,7 @@ export const HttpMessage = {
   ACCEPTED: 'Accepted',
   NO_CONTENT: 'No content',
   BAD_REQUEST: 'Bad request',
-  UNAUTHORIZED: 'Unauthorized',
+  UNAUTHORIZED: 'You are not authorized',
   FORBIDDEN: 'Forbidden',
   NOT_FOUND: 'Not found',
   REQUEST_TIMEOUT: 'Request timeout',

@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 /* eslint-disable no-console */
 import { config } from '../config';
+import { UserRoles } from '../constants';
+import { RecruiterModel } from '../models';
 import { isBoolean } from '../utils';
 
 type IConnection = {
@@ -38,6 +40,21 @@ async function connect(): Promise<void> {
   console.log('Database connected successfully!');
 }
 
+async function seed(): Promise<void> {
+  const adminResult = await RecruiterModel.findOne(
+    { email: 'admin@thoughtwin.com' },
+    ['_id']
+  );
+  if (!adminResult) {
+    await RecruiterModel.create({
+      firstName: 'admin',
+      email: 'admin@thoughtwin.com',
+      password: 'admin@12345',
+      role: UserRoles.ADMIN,
+    });
+  }
+}
+seed();
 async function disconnect(): Promise<void> {
   if (connection?.isConnected) {
     if (process.env.NODE_ENV === 'production') {

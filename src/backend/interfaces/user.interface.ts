@@ -7,6 +7,21 @@ export interface IUser extends Document {
   lastName: string;
   email: string;
   phoneNumber: string;
+  photo: string;
+  isVerified: boolean;
+  isActive: boolean;
+  role: UserRoles;
+  passwordChangedAt: Date;
+  resetPasswordToken: string;
+  resetPasswordExpire: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface IRecruiter extends Document {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
   password: string;
   photo: string;
   isVerified: boolean;

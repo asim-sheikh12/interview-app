@@ -70,6 +70,7 @@ const Home: React.FC = () => {
                         name="email"
                         label="Email"
                         fullWidth
+                        size="medium"
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position="end">
@@ -81,10 +82,12 @@ const Home: React.FC = () => {
                     </Box>
                     <Box marginY={4}>
                       <Field
+                        variant="outlined"
                         autoComplete="current-password"
                         component={PasswordField}
                         label="Password"
                         name="password"
+                        size="medium"
                         fullWidth
                       />
                     </Box>

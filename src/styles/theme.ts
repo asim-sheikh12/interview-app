@@ -60,7 +60,7 @@ export const theme: ITheme = responsiveFontSizes(
         default: '#ffffff',
       },
       error: {
-        main: '#FF0000',
+        main: '#D16947',
         light: '#D16947',
         dark: '#D16947',
       },
@@ -80,9 +80,35 @@ export const theme: ITheme = responsiveFontSizes(
         dark: '#51A087',
       },
     },
-    shape: {
-      borderRadius: 0,
-    },
+    // shape: {
+    //   borderRadius: 0,
+    // },
+    // components: {
+    //   // Name of the component
+    //   MuiTextField: {
+    //     styleOverrides: {
+    //       // Name of the slot
+    //       root: {
+    //         backgroundColor: '#FFFF',
+    //         '&:hover': {
+    //           backgroundColor: 'rgb(250, 232, 241)',
+    //           // Reset on touch devices, it doesn't add specificity
+    //           '@media (hover: none)': {
+    //             backgroundColor: 'rgb(232, 241, 250)',
+    //           },
+    //         },
+    //         '&.Mui-focused': {
+    //           backgroundColor: 'rgb(250, 241, 232)',
+    //         },
+    //         '&:-webkit-autofill': {
+    //           backgroundColor: '#FFFF',
+    //           '-webkit-box-shadow': '0 0 0 100px #000 inset',
+    //           '-webkit-text-fill-color': '#fff',
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
 
     typography: {
       fontFamily: 'Roboto',
