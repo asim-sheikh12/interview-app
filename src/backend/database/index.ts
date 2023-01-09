@@ -15,6 +15,22 @@ const connection: IConnection = {
 
 mongoose.set('strictQuery', true);
 
+async function seed(): Promise<void> {
+  const adminResult = await RecruiterModel.findOne(
+    { email: 'admin@thoughtwin.com' },
+    ['_id']
+  );
+  if (!adminResult) {
+    await RecruiterModel.create({
+      firstName: 'Super',
+      lastName: 'Admin',
+      email: 'admin@thoughtwin.com',
+      password: 'admin@12345',
+      role: UserRoles.ADMIN,
+    });
+  }
+}
+
 async function connect(): Promise<void> {
   if (connection?.isConnected && isBoolean(connection.isConnected)) {
     console.log('Database is already connected!');
@@ -23,6 +39,7 @@ async function connect(): Promise<void> {
   if (mongoose.connections.length > 0) {
     connection.isConnected = mongoose.connections[0]!.readyState;
     if (connection?.isConnected === 1) {
+      seed();
       console.log('Using previous database connection!');
       return;
     }
@@ -37,24 +54,10 @@ async function connect(): Promise<void> {
   database.on('open', () => {
     connection.isConnected = true;
   });
+  seed();
   console.log('Database connected successfully!');
 }
 
-async function seed(): Promise<void> {
-  const adminResult = await RecruiterModel.findOne(
-    { email: 'admin@thoughtwin.com' },
-    ['_id']
-  );
-  if (!adminResult) {
-    await RecruiterModel.create({
-      firstName: 'admin',
-      email: 'admin@thoughtwin.com',
-      password: 'admin@12345',
-      role: UserRoles.ADMIN,
-    });
-  }
-}
-seed();
 async function disconnect(): Promise<void> {
   if (connection?.isConnected) {
     if (process.env.NODE_ENV === 'production') {

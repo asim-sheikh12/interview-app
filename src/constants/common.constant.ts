@@ -15,6 +15,10 @@ export const enum ApiVersions {
   V1 = 'V1',
   MOCK = 'MOCK',
 }
+export const enum UserRole {
+  ADMIN = 'admin',
+  RECRUITER = 'recruiter',
+}
 
 export const enum HttpMethods {
   GET = 'GET',

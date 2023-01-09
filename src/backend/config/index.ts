@@ -13,6 +13,12 @@ export const config = {
     EXPIRES_IN: getOsEnv('JWT_EXPIRES_IN'),
     JWT_SECRET: getOsEnv('JWT_SECRET'),
   },
+  CLOUDINARY: {
+    CLOUD_NAME: getOsEnv('CLOUD_NAME'),
+    CLOUD_API_KEY: getOsEnv('CLOUD_API_KEY'),
+    CLOUD_API_SECRET: getOsEnv('CLOUD_API_SECRET'),
+    CLOUD_SECURE: getOsEnv('CLOUD_SECURE'),
+  },
   HASH_SALT: toNumber(getOsEnv('HASH_SALT')),
   CRYPTO_ROUNDS: toNumber(getOsEnv('CRYPTO_ROUNDS')),
 };

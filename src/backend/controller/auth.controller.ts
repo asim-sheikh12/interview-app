@@ -69,7 +69,7 @@ export const loginUser = asyncHandler(
     return res.status(HttpStatus.OK).json({
       status: HttpStatus.OK,
       message: 'Login Successfull',
-      data: { userId: foundUser._id, ...tokenData },
+      data: { userId: foundUser._id, role: foundUser.role, ...tokenData },
     });
   }
 );

@@ -1,10 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { HttpStatus } from '@/backend/constants';
+import { HttpStatus, UserRoles } from '@/backend/constants';
 import { BadRequestException } from '@/backend/exceptions';
 import type { IRecruiter } from '@/backend/interfaces';
 import { asyncHandler } from '@/backend/middlewares';
 import { recruiterRepository } from '@/backend/repositories';
+
+interface MulterRequest extends NextApiRequest {
+  file: any;
+}
 
 /**
  * @description Add new recruiter.
@@ -13,9 +17,10 @@ import { recruiterRepository } from '@/backend/repositories';
  * @access Private
  */
 export const addRecruiter = asyncHandler(
-  async (req: NextApiRequest, res: NextApiResponse) => {
-    const { firstName, lastName, phoneNumber, email, photo } =
-      req.body as IRecruiter;
+  async (req: MulterRequest, res: NextApiResponse) => {
+    console.log(req.body, req.file);
+    const photo = req?.file?.path;
+    const { firstName, lastName, phoneNumber, email } = req.body as IRecruiter;
 
     const foundUser: IRecruiter = await recruiterRepository.findOne({ email }, [
       '_id',
@@ -27,7 +32,7 @@ export const addRecruiter = asyncHandler(
     const recruiter: IRecruiter = await recruiterRepository.create({
       firstName,
       lastName,
-      password: `${firstName.slice(0, 3).toLowerCase()}@12345`,
+      password: `${firstName?.slice(0, 3)?.toLowerCase()}@12345`,
       photo,
       phoneNumber,
       email,
@@ -50,7 +55,9 @@ export const addRecruiter = asyncHandler(
 
 export const getAllRecuiter = asyncHandler(
   async (_req: NextApiRequest, res: NextApiResponse) => {
-    const result: IRecruiter[] = await recruiterRepository.findAll();
+    const result: IRecruiter[] = await recruiterRepository.find({
+      role: UserRoles.RECRUITER,
+    });
     if (!result) {
       throw new BadRequestException('Recruiters does not exists');
     }
@@ -121,13 +128,14 @@ export const updateRecruiter = asyncHandler(
     const { id } = req.query;
     const { firstName, lastName, email, phoneNumber, photo } =
       req.body as IRecruiter;
+    const user = await recruiterRepository.findOne({ _id: id });
+    if (!user) {
+      throw new BadRequestException('Recruiter does not exists');
+    }
     const result = await recruiterRepository.findOneAndUpdate(
       { _id: id },
       { firstName, lastName, email, phoneNumber, photo }
     );
-    if (!result) {
-      throw new BadRequestException('Recruiter does not exists');
-    }
 
     return res.status(HttpStatus.OK).json({
       status: HttpStatus.OK,

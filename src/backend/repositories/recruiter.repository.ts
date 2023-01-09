@@ -18,6 +18,7 @@ export class RecruiterRepository {
     where: object,
     setObject: object
   ): Promise<IRecruiter> {
+    console.log(where);
     return RecruiterModel.findOneAndUpdate(
       where,
       { $set: setObject },

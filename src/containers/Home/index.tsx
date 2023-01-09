@@ -8,27 +8,50 @@ import {
   InputAdornment,
   Typography,
 } from '@mui/material';
+import { setCookie } from 'cookies-next';
 import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-mui';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import { PasswordField } from '@/components';
-import { icons } from '@/constants';
+import { icons, URL, UserRole } from '@/constants';
+import { handleLogin } from '@/services';
+import { AppConfig } from '@/utils';
 import { loginSchema } from '@/validations';
+
+interface IFormValues {
+  email: string;
+  password: string;
+}
 
 const Home: React.FC = () => {
   const initialValues = {
     email: '',
     password: '',
   };
-
+  const router = useRouter();
   const onSubmit = async (
-    values: { email: string; password: string },
+    values: IFormValues,
     submitProps: { setSubmitting: (arg0: boolean) => void }
   ) => {
-    console.log({ values });
-    submitProps.setSubmitting(false);
+    const response = await handleLogin(values);
+    if (response?.status && response?.status === 200) {
+      setCookie(AppConfig.tokenKey, response?.data?.token);
+      setCookie(AppConfig.userId, response?.data?.userId);
+      router.push(
+        response?.data?.role === UserRole.ADMIN
+          ? URL.RECRUITER_LIST
+          : URL.CANDIDATE_LIST
+      );
+      toast.success('Login Successfull');
+
+      submitProps.setSubmitting(false);
+    } else {
+      toast.error(response.message);
+    }
   };
   return (
     <Box sx={{ display: 'flex', backgroundColor: '#F0F0F0', height: '96vh' }}>
@@ -93,7 +116,6 @@ const Home: React.FC = () => {
                     </Box>
                     <Button
                       variant="contained"
-                      sx={{ backgroundColor: 'red' }}
                       fullWidth
                       type="submit"
                       disabled={!formik.isValid}

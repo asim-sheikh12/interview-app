@@ -60,7 +60,6 @@ export const checkRoleMiddleware = asyncHandler(
     } else if (req.cookies?.token) {
       token = req.cookies.token;
     }
-
     if (!token) {
       throw new UnauthorizedException(
         HttpMessage.UNAUTHORIZED,

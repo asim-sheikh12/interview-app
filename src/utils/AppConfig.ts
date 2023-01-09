@@ -4,6 +4,7 @@ export const AppConfig = {
   title: 'title',
   description: `description`,
   tokenKey: 'token',
+  userId: 'userId',
   paths: {
     BASE: process.env.NEXT_PUBLIC_BASE_PATH!,
     WEBSITE_URL: process.env.NEXT_PUBLIC_BASE_PATH!,
