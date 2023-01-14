@@ -29,6 +29,13 @@ export function getCookie(key: string, req: Request | null): string {
   return cookie?.toString() ?? '';
 }
 
+export const randomColor = () => {
+  const hex = Math.floor(Math.random() * 0xffffff);
+  const color = `#${hex.toString(16)}`;
+
+  return color;
+};
+
 // export const encodeString = (val: string) => {
 //   const encodedString = AES.encrypt(val, config.JWT.JWT_SECRET).toString();
 //   return encodedString;

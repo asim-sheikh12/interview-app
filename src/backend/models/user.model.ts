@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 import { model, models, Schema } from 'mongoose';
 
-import { UserRoles } from '@/backend/constants';
+import { CandidateStatus, UserRoles } from '@/backend/constants';
 import { softDeletePlugin } from '@/backend/plugins';
 
 const userSchema = new Schema(
@@ -21,6 +21,22 @@ const userSchema = new Schema(
       unique: true,
       lowercase: true,
     },
+    currentCompany: {
+      type: String,
+      required: [true, 'Company is Required'],
+    },
+    experience: {
+      type: String,
+      required: [true, 'Experience is Required'],
+    },
+    currentCTC: {
+      type: String,
+      required: [true, 'Current ctc is Required'],
+    },
+    expectedCTC: {
+      type: String,
+      required: [true, 'Expected ctc is Required'],
+    },
     phoneNumber: {
       type: String,
       required: [true, 'Contact Number is Required'],
@@ -30,9 +46,14 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
+    isSelected: {
+      type: String,
+      enum: [
+        CandidateStatus.SELECTED,
+        CandidateStatus.ON_HOLD,
+        CandidateStatus.REJECTED,
+      ],
+      default: CandidateStatus.ON_HOLD,
     },
     isActive: {
       type: Boolean,

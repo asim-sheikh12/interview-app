@@ -17,9 +17,13 @@ export interface IRecruiter {
 }
 
 export interface IUser {
-  firtstName?: string;
+  firstName?: string;
   lastName?: string;
   email?: string;
   phoneNumber?: string;
   photo?: string;
+  experience?: string;
+  currentCompany?: string;
+  currentCTC?: string;
+  expectedCTC?: string;
 }

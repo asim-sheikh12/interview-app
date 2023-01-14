@@ -10,3 +10,8 @@ export enum UserRoles {
   RECRUITER = 'recruiter',
   INTERVIEWER = 'interviewer',
 }
+export enum CandidateStatus {
+  SELECTED = 'selected',
+  REJECTED = 'rejected',
+  ON_HOLD = 'onhold',
+}

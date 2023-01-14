@@ -1,3 +1,4 @@
+import EmailIcon from '@mui/icons-material/Email';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -9,7 +10,7 @@ import type { CSSObject, Theme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 
-import { UserRole } from '@/constants';
+import { URL, UserRole } from '@/constants';
 import type { IRecruiter } from '@/interfaces';
 import Header from '@/layouts/Header';
 
@@ -73,36 +74,36 @@ export const DashboardSidebar = ({ userData }: IProps) => {
     userData?.role && userData?.role === UserRole.ADMIN
       ? [
           {
-            href: '/recruiter/list',
+            href: URL.RECRUITER_LIST,
             icon: <PeopleIcon fontSize="small" />,
             title: 'Recruiter List',
           },
           {
-            href: '/recruiter',
+            href: URL.RECRUITER,
             icon: <PersonAddAlt1Icon fontSize="small" />,
             title: 'Add Recruiter',
           },
 
           {
-            href: '/settings',
+            href: URL.SETTINGS,
             icon: <SettingsIcon fontSize="small" />,
             title: 'Settings',
           },
         ]
       : [
           {
-            href: '/candidate/list',
+            href: URL.CANDIDATE_LIST,
             icon: <PeopleIcon fontSize="small" />,
             title: 'Candidate List',
           },
           {
-            href: '/candidate',
-            icon: <PersonAddAlt1Icon fontSize="small" />,
-            title: 'Add Candidate',
+            href: URL.SEND_EMAIL,
+            icon: <EmailIcon fontSize="small" />,
+            title: 'Send Email',
           },
 
           {
-            href: '/settings',
+            href: URL.SETTINGS,
             icon: <SettingsIcon fontSize="small" />,
             title: 'Settings',
           },

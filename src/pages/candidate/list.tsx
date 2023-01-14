@@ -2,13 +2,18 @@ import { Box, Container } from '@mui/material';
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CustomTable, Toolbar } from '@/components';
 import { DashboardLayout } from '@/containers';
 import type { IData, IRecruiter } from '@/interfaces';
 import { getAllCandidates } from '@/services';
 
-const Page = ({ data }: IData<IRecruiter>) => {
+const Page = ({ data }: IData<IRecruiter[]>) => {
+  const [tableData, setTableData] = useState<IRecruiter[]>([]);
+  useEffect(() => {
+    setTableData(data);
+  }, []);
   return (
     <>
       <Head>
@@ -22,9 +27,13 @@ const Page = ({ data }: IData<IRecruiter>) => {
         }}
       >
         <Container maxWidth={false}>
-          <Toolbar heading="Candidate List" />
+          <Toolbar
+            heading="Candidate List"
+            tableData={data}
+            setTableData={setTableData}
+          />
           <Box sx={{ mt: 3 }}>
-            <CustomTable tableData={data} />
+            <CustomTable tableData={tableData} />
           </Box>
         </Container>
       </Box>
@@ -38,7 +47,6 @@ export default Page;
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const candidateData = await getAllCandidates(req);
-  console.log({ candidateData });
   const { data } = candidateData;
   return {
     props: {

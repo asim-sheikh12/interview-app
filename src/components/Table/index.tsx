@@ -11,11 +11,13 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import Router from 'next/router';
 import type { SetStateAction } from 'react';
 import { useState } from 'react';
 
+import { URL } from '@/constants';
 import type { IRecruiter } from '@/interfaces';
-import { getInitials } from '@/utils';
+import { getInitials, randomColor } from '@/utils';
 
 export const CustomTable = ({ tableData }: any) => {
   const [limit, setLimit] = useState(10);
@@ -45,7 +47,14 @@ export const CustomTable = ({ tableData }: any) => {
           </TableHead>
           <TableBody>
             {tableData?.map((data: IRecruiter) => (
-              <TableRow hover key={data._id}>
+              <TableRow
+                hover
+                key={data._id}
+                onClick={() =>
+                  Router.push(`${URL.CANDIDATE_DETAIL}/${data._id}`)
+                }
+                sx={{ cursor: 'pointer' }}
+              >
                 <TableCell>
                   <Box
                     sx={{
@@ -53,7 +62,10 @@ export const CustomTable = ({ tableData }: any) => {
                       display: 'flex',
                     }}
                   >
-                    <Avatar src={data.photo} sx={{ mr: 2 }}>
+                    <Avatar
+                      src={data.photo}
+                      sx={{ mr: 2, backgroundColor: randomColor() }}
+                    >
                       {getInitials(`${data.firstName} ${data?.lastName}`)}
                     </Avatar>
                     <Typography color="textPrimary" variant="body1">

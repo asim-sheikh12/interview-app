@@ -6,6 +6,8 @@ import type { IUser } from '@/backend/interfaces';
 import { asyncHandler } from '@/backend/middlewares';
 import { userRepository } from '@/backend/repositories';
 
+import { sendEmail } from '../services';
+
 /**
  * @description Get all user.
  * @url /user
@@ -39,6 +41,29 @@ export const getUserById = asyncHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
     const { id } = req.query;
     const result: IUser = await userRepository.findOne({ _id: id });
+    if (!result) {
+      throw new BadRequestException('User does not exists');
+    }
+
+    return res.status(HttpStatus.OK).json({
+      status: HttpStatus.OK,
+      message: 'User fetched successfully',
+      data: result,
+    });
+  }
+);
+
+/**
+ * @description Get user by email.
+ * @url /user/email
+ * @param {IUser} user
+ * @access Private
+ */
+
+export const getUserByEmail = asyncHandler(
+  async (req: NextApiRequest, res: NextApiResponse) => {
+    const { email } = req.query;
+    const result: IUser = await userRepository.findOne({ email });
     if (!result) {
       throw new BadRequestException('User does not exists');
     }
@@ -93,6 +118,30 @@ export const updateUser = asyncHandler(
     if (!result) {
       throw new BadRequestException('User does not exists');
     }
+
+    return res.status(HttpStatus.OK).json({
+      status: HttpStatus.OK,
+      message: 'User updated successfully',
+      data: result,
+    });
+  }
+);
+
+/**
+ * @description Send email to user.
+ * @url /user/send-email
+ * @param {IUser} user
+ * @access Private
+ */
+
+export const sendEmailToUser = asyncHandler(
+  async (req: NextApiRequest, res: NextApiResponse) => {
+    const { firstName, lastName, email, data } = req.body;
+    const result = await userRepository.findOne({ email });
+    if (result) {
+      throw new BadRequestException('User Already Exists');
+    }
+    sendEmail({ firstName, lastName, email, data });
 
     return res.status(HttpStatus.OK).json({
       status: HttpStatus.OK,

@@ -115,7 +115,7 @@ export const theme: ITheme = responsiveFontSizes(
       text: {
         primary: '#121828',
         secondary: '#65748B',
-        disabled: 'rgba(55, 65, 81, 0.48)',
+        disabled: 'rgb(88,88,88)',
       },
     },
     shape: {
@@ -235,6 +235,16 @@ export const theme: ITheme = responsiveFontSizes(
             flexDirection: 'column',
             height: '100%',
             width: '100%',
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            '.Mui-disabled': {
+              cursor: 'not-allowed',
+              borderRadius: 8,
+            },
           },
         },
       },

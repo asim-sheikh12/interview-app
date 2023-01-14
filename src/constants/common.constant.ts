@@ -3,10 +3,12 @@
 // }/icons/`;
 import backgroundImg from '../assets/images/background.jpg';
 import logoIcon from '../assets/images/Logo.svg';
+import bgImage from '../assets/images/registerBg.jpg';
 
 export const icons = {
   logoIcon,
   backgroundImg,
+  bgImage,
 };
 
 export const favIcons = `${process.env.NEXT_PUBLIC_BASE_PATH}/favicons`;

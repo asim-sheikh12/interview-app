@@ -8,8 +8,10 @@ export interface IUser extends Document {
   email: string;
   phoneNumber: string;
   photo: string;
-  isVerified: boolean;
-  isActive: boolean;
+  experience: string;
+  currentCompany: string;
+  currentCTC: string;
+  expectedCTC: string;
   role: UserRoles;
   passwordChangedAt: Date;
   resetPasswordToken: string;

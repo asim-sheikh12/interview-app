@@ -19,9 +19,34 @@ export class JwtService {
     };
   }
 
+  createCandidateToken(user: IRecruiter): TokenData {
+    const dataStoredInToken: DataStoredInToken = {
+      _id: user._id,
+      email: user.email,
+    };
+    const secretKey: string = config.JWT.JWT_SECRET;
+    const expiresIn: number = 60 * 60;
+
+    return {
+      token: sign(dataStoredInToken, secretKey, { expiresIn }),
+      expiresIn,
+    };
+  }
+
   verifyToken = async (token: string): Promise<string | JwtPayload> => {
     const decoded = await verify(token, config.JWT.JWT_SECRET);
     return decoded;
+  };
+
+  verifyCandidateToken = async (
+    token: string
+  ): Promise<string | JwtPayload | boolean> => {
+    try {
+      const decoded = await verify(token, config.JWT.JWT_SECRET);
+      return decoded;
+    } catch (error: any) {
+      return false;
+    }
   };
 
   signToken = (id: string): string => {

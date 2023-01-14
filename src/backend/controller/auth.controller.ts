@@ -17,7 +17,16 @@ import { jwtService } from '../services/jwt.service';
  */
 export const registerUser = asyncHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    const { firstName, lastName, phoneNumber, email } = req.body as IUser;
+    const {
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      experience,
+      currentCompany,
+      currentCTC,
+      expectedCTC,
+    } = req.body as IUser;
 
     const foundUser: IUser = await userRepository.findOne({ email }, ['_id']);
     if (foundUser) {
@@ -29,6 +38,10 @@ export const registerUser = asyncHandler(
       lastName,
       phoneNumber,
       email,
+      experience,
+      currentCompany,
+      currentCTC,
+      expectedCTC,
     });
 
     return res.status(HttpStatus.CREATED).json({

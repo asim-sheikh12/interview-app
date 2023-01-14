@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { IData, IUser, Request } from '@/interfaces';
 
 import { ApiVersions, RECRUITER } from '../constants';
@@ -46,10 +47,32 @@ export const getAllCandidates = (req?: Request): Promise<IData<IUser[]>> => {
  * @method GET
  */
 
-export const getCandidateById = (id: string): Promise<IData<IUser[]>> => {
+export const getCandidateById = (
+  id: string,
+  req?: Request
+): Promise<IData<IUser[]>> => {
   return apiService.get<IData<IUser[]>, object>(
     `${RECRUITER.ACTIONS}/${id}`,
-    ApiVersions.V1
+    ApiVersions.V1,
+    req
+  );
+};
+/**
+ * @description Get candidate by email
+ * @param email
+ * @return IUser[]
+ * @url /candidate/email
+ * @method GET
+ */
+
+export const getCandidateByEmail = (
+  email: string,
+  req?: Request
+): Promise<IData<IUser[]>> => {
+  return apiService.get<IData<IUser[]>, object>(
+    `${RECRUITER.GET_BY_EMAIL}/${email}`,
+    ApiVersions.V1,
+    req
   );
 };
 
